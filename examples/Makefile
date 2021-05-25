@@ -13,7 +13,7 @@ CXXFLAGS = $(CXX11FLAGS) $(OS_CXXFLAGS) -pthread -Wall -g -O2 -DSSL_LIB_INIT -I$
 LDFLAGS = -L${ZROOT}/deps/root/lib -L${ZROOT}/root/lib $(LOC_LIB)
 LIBS = -lcrypto -lrelic -lrelic_ec -lopenabe
 
-all: test_kp test_cp test_pk test_km server crypthook simplehttp http_proxy
+all: test_kp test_cp test_pk test_km server crypthook simplehttp http_proxy abehook
 
 test_kp: test_kp.o
 	$(CXX) -o test_kp $(CXXFLAGS) $(LDFLAGS) test_kp.cpp $(LIBS)
@@ -39,6 +39,9 @@ simplehttp:
 http_proxy:
 	$(CXX) -o http_proxy -lpthread $(CXXFLAGS) $(LDFLAGS) http_proxy.cpp $(LIBS)
 
+abehook: 
+        $(CXX) -o abehook.so $(CXXFLAGS) $(LDFLAGS) abehook.cpp -shared -fpic -ldl $(LIBS)
+
 test:
 	./test_kp
 	./test_cp
@@ -49,5 +52,5 @@ test:
 	./http_proxy
 
 clean:
-	rm -rf *.o *.dSYM test_kp test_cp test_pk test_km server crypthook.so simplehttp http_proxy
+	rm -rf *.o *.dSYM test_kp test_cp test_pk test_km server crypthook.so simplehttp http_proxy abehook.so
  
