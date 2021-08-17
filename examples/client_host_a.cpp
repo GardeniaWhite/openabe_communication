@@ -88,6 +88,7 @@ int main(int argc, char *argv[])
         {
             outfile << pt;
         }
+        outfile.close();
        // message[str_len] = '\0';
        // printf("%s\n", message);
         //printf("Message from server : %s\n", message);
